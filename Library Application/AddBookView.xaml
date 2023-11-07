@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="Library_Application.AddBookView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Library_Application"
+             Background="White"
+             HorizontalAlignment="Center"
+             VerticalAlignment="Center"
+             Width="400" Height="450">
+
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,5"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,5"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,10"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Add a New Book" FontWeight="Bold" Margin="0,0,0,20" FontSize="24"/>
+
+            <StackPanel>
+                <TextBlock Text="Title:"/>
+                <TextBox x:Name="TitleTextBox"/>
+                <Label x:Name="TitlePlaceholder" Content="Enter title" Foreground="Gray" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Author:"/>
+                <TextBox x:Name="AuthorTextBox" />
+                <Label x:Name="AuthorPlaceholder" Content="Enter author" Foreground="Gray" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Genre:"/>
+                <TextBox x:Name="GenreTextBox"/>
+                <Label x:Name="GenrePlaceholder" Content="Enter genre" Foreground="Gray" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="ISBN:"/>
+                <TextBox x:Name="ISBNTextBox"/>
+                <Label x:Name="ISBNPlaceholder" Content="Enter ISBN" Foreground="Gray" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
+            </StackPanel>
+
+            <Button Content="Add" HorizontalAlignment="Center" Background="#FF4080" Foreground="White" FontWeight="Bold" Click="Button_Click"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
