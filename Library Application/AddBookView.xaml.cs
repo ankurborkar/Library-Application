@@ -48,6 +48,20 @@ namespace Library_Application
                 return;
             }
 
+            // Validate ISBN
+            if (!IsValidISBN(isbn))
+            {
+                MessageBox.Show("Invalid ISBN format. Please enter a valid ISBN.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // Check if the ISBN is already in use
+            if (_viewModel.Books.Any(book => book.ISBN == isbn))
+            {
+                MessageBox.Show("ISBN must be unique. A book with this ISBN already exists.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             // Create a new Book object with the entered data
             Book newBook = new Book { Title = title, Author = author, Genre = genre, ISBN = isbn };
 
@@ -66,6 +80,14 @@ namespace Library_Application
             BookAdded?.Invoke(this, EventArgs.Empty);
             Close();
         }
+
+        // ISBN validation method
+        private bool IsValidISBN(string isbn)
+        {
+            
+            return !string.IsNullOrEmpty(isbn) ;
+        }
+
         public void Close()
         {
             // Close the window here
