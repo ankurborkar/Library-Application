@@ -27,6 +27,12 @@ namespace Library_Application
             InitializeComponent();
             // Create an instance of MainViewModel and set it as the DataContext
             DataContext = new MainViewModel();
+
+            // Temporary event handler for DataContext inspection
+            DataContextChanged += (sender, args) =>
+            {
+                Console.WriteLine($"DataContext changed to: {DataContext}");
+            };
         }
 
 

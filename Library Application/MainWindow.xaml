@@ -9,6 +9,11 @@
     <Window.DataContext>
         <local:MainViewModel />
     </Window.DataContext>
+
+    <Window.Resources>
+        <local:ZeroToVisibilityConverter x:Key="ZeroToVisibilityConverter" />
+    </Window.Resources>
+    
     <Window.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
             <LinearGradientBrush.GradientStops>
@@ -36,6 +41,8 @@
             <TextBlock Text="Author:" Margin="5" VerticalAlignment="Center" Foreground="White" />
             <TextBox Text="{Binding FilterAuthor, UpdateSourceTrigger=PropertyChanged}" Width="200" Margin="5" />
 
+                
+            
             <TextBlock Text="Genre:" Margin="5" VerticalAlignment="Center" Foreground="White" />
             <TextBox Text="{Binding FilterGenre, UpdateSourceTrigger=PropertyChanged}" Width="200" Margin="5" />
 
@@ -43,30 +50,20 @@
         </StackPanel>
 
         <!-- Content for No Books -->
-        <ContentControl Grid.Row="2" Content="{Binding}">
-            <ContentControl.Style>
-                <Style TargetType="ContentControl">
-                    <Style.Triggers>
-                        <!-- Use DataTrigger to show content when FilteredBooksView.Count is zero -->
-                        <DataTrigger Binding="{Binding FilteredBooksView.Count}" Value="0">
-                            <Setter Property="Content">
-                                <Setter.Value>
-                                    <TextBlock Text="No books available" Opacity="0.5" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" />
-                                </Setter.Value>
-                            </Setter>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ContentControl.Style>
-        </ContentControl>
+        <TextBlock Grid.Row="2" Text="No books available" Opacity="0.5" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Visibility="{Binding FilteredBooksView.Count, Converter={StaticResource ZeroToVisibilityConverter}}" />
+
+        <!-- Test TextBlock for Visibility -->
+        <TextBlock
+    Text="{Binding FilteredBooksView.Count}"
+    Visibility="{Binding FilteredBooksView.Count, Converter={StaticResource ZeroToVisibilityConverter}}" />
 
 
 
         <!-- Display ListBox for Books -->
-        <DataGrid Name="BooksDataGrid" ItemsSource="{Binding FilteredBooksView}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedBook}" Grid.Row="2" CanUserAddRows="False">
+        <DataGrid Name="BooksDataGrid" ItemsSource="{Binding FilteredBooksView}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedBook}" Grid.Row="2" IsReadOnly="True" CanUserAddRows="False">
             <!-- Define custom columns -->
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}" Width="*"/>
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="ISBN"  Binding="{Binding ISBN}" Width="*"/>
                 <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="*"/>
                 <DataGridTextColumn Header="Author" Binding="{Binding Author}" Width="*"/>
                 <DataGridTextColumn Header="Genre" Binding="{Binding Genre}" Width="*"/>

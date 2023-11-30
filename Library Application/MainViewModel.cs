@@ -10,10 +10,11 @@ using CsvHelper.Configuration;
 using System.Linq;
 using System;
 using System.Windows.Data;
+using System.Collections.Generic;
 
 namespace Library_Application
 {
-    internal class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<Book> books;
         public ObservableCollection<Book> Books
@@ -236,7 +237,7 @@ namespace Library_Application
             }
             // Implement the logic for adding a book
             //Book newBook = new Book { Title = Title, Author = Author, Genre = Genre, ISBN = ISBN };
-            // Books.Add(newBook);
+            //Books.Add(newBook);
             //MessageBox.Show("Book added successfully!", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
 
         }
@@ -282,6 +283,12 @@ namespace Library_Application
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is MainViewModel model &&
+                   EqualityComparer<ObservableCollection<Book>>.Default.Equals(Books, model.Books);
         }
     }
 }
